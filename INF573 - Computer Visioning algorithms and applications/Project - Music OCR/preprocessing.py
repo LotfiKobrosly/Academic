@@ -26,7 +26,7 @@ def angleFft(a, n, m):
           else:
             m2 = x
             i2, j2 = i, j
-    print i1,j1, i2,j2
+    print( i1,j1, i2,j2)
     if i1 == i2:
       return np.pi/2
     return np.arctan((j2-j1)/(i2-i1))*180/np.pi
@@ -40,11 +40,11 @@ def findAngleWithFft(img, n, m):
 
 def findAngleWithHoughLines(img, n, m):
   img = cv2.Canny(img,50, 200, 3)
-  lines = cv2.HoughLines(img,0.5,np.pi/720,m/5)
+  lines = cv2.HoughLines(img,0.5,np.pi/720,int(m/5))
   thetas = []
   for line in lines:
     theta = line[0][1]
-#    print theta
+#    print(theta)
     thetas.append(theta-np.pi/2)
 #  return (np.sum(thetas)*180/np.pi)/len(thetas)
   return np.median(thetas)*180/np.pi 
@@ -70,7 +70,7 @@ def projection(img, angle):
   corners = [(0,0), (n-1,0), (n-1,m-1), (0,m-1)]
   majorPoints = sorted([np.dot(corner, projVector) for corner in corners])
   Max, Min = majorPoints[3], majorPoints[0]
-  print Max, Min
+  print(Max, Min)
 #  projVector /= (Max - Min)
 #  C = Min / (Max - Min)
   projections = [0]*int(Max - Min+1)
@@ -79,7 +79,7 @@ def projection(img, angle):
       try:
         projections[int(np.dot(np.array([i,j]), projVector)-Min)] += 1-img[i][j]/255.0
       except IndexError:
-        print Max - Min, np.dot(np.array([i,j]), projVector)-Min, n, i, m, j
+        print(Max - Min, np.dot(np.array([i,j]), projVector)-Min, n, i, m, j)
 #  plt.plot(range(int(Max-Min+1)), projections)
   return projections
 
@@ -159,26 +159,26 @@ def localMaxes(array):
 ##  projValues = projection(img, 0)
 #  indexes = [0]
 #  goodRects = []
-#  print m, n
+#  print (m, n)
 #  for i in range(len(rects)-1):
-#    print rects[i]
-##    print rects[i][1],rects[i][3], m/3:
+#    print (rects[i])
+##    print (rects[i][1],rects[i][3], m/3:
 #    if rects[i][2] > m / 3 and rects[i][3]<n-1:  
-#      print "Yay"
+#      print ("Yay")
 #      goodRects.append(rects[i])
 #      
 #  goodRects.sort(key = lambda i: i[1])
 #  for i in range(len(goodRects)-1):
-##    print rects[i]
-##    print rects[i][1],rects[i][3], m/3:
+##    print (rects[i])
+##    print (rects[i][1],rects[i][3], m/3:
 #    indexes.append((goodRects[i][1]+goodRects[i][3] + goodRects[i+1][1])//2)
 #  indexes.append(n-1)
 #  staves = []
 #  for i in range(len(indexes) - 1):
 #    ""
 #    staves.append(img[indexes[i]:indexes[i+1], 0:m-1])
-#    print indexes[i+1] - indexes[i]
-#    print staves[i-1].shape
+#    print (indexes[i+1] - indexes[i])
+#    print (staves[i-1].shape)
 #  return staves
   
 
@@ -223,7 +223,7 @@ def localMaxes(array):
 #  spaceLines = []
 #  for s in spaces:
 #    spaceLines.append((s[0] + s[1]) // 2)
-#    print s
+#    print(s)
 ##  distances = [spaceLines[s+1] - spaceLines[s] for s in range(len(spaceLines)-1)]
 ##  mmm = max(distances)
 ##  index = 0
@@ -233,7 +233,7 @@ def localMaxes(array):
 ##      spaceLinesFinal.append()
 #  staves = []
 #  for s in range(len(spaces)-1):
-#    print spaces[s]
+#    print(spaces[s])
 #    staves.append(img[spaceLines[s]:spaceLines[s+1], 0:m-1]) 
 #  return staves
             
@@ -241,7 +241,7 @@ def getSingleStaves(img, n, m):
   
   #Hough lines for whole image
   canny = cv2.Canny(img,50, 200, 3)
-  lines = cv2.HoughLines(canny,0.5 ,np.pi/360,m/5)
+  lines = cv2.HoughLines(canny,0.5 ,np.pi/360,int(m/5))
   goodLines = []
   
   #taking horizontal lines
@@ -253,7 +253,7 @@ def getSingleStaves(img, n, m):
   #2 lines = distance between 2 staves
   goodLines.sort()
   maxDistance = max(goodLines[i+1] - goodLines[i] for i in range(len(goodLines)-1))
-  print goodLines, maxDistance
+  print(goodLines, maxDistance)
   
   #getting separation lines
   sepLines = [int(goodLines[0]//2)]
@@ -349,7 +349,7 @@ def regions(staves, staffLines, j):
   
   
 if __name__ == '__main__':
-  raw = cv2.imread('sheets/sheet1.png',0)
+  raw = cv2.imread('sheets/sheet2.png',0)
   n, m = raw.shape[:2]
   raw = cv2.adaptiveThreshold(raw, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 15, 5) 
 #  raw = 255-rotateImage(255-raw, n, m, 50)
@@ -357,7 +357,7 @@ if __name__ == '__main__':
 #  cv2.imshow('image1',raw)
   
   angle = findAngleWithHoughLines(255-raw, n, m)
-#  print angle
+#  print(angle)
 #  projection(raw, 0)
   raw = 255-rotateImage(255-raw, n, m, angle)
   projections = projection(raw, 0)
