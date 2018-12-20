@@ -1,0 +1,49 @@
+9  - accidents
+27 - accents
+25 - breve
+57 - breve+dot
+24 - semibreve
+58 - semibre+dot
+54 - minim
+55 - minim+dot
+44 - quarter
+49 - quarter+dot
+45 - quarter+1beam
+69 - eighth
+50 - quarter+1beam+dot
+70 - eighth + dot
+46 - quarter+2beam 
+71 - sixteenth
+51 - quarter+2beam+dot
+72 - sixteenth+dot
+47 - quarter+3beam 
+73 - Thirty-second 
+52 - quarter+3beam+dot
+74 - Thirty-second+dot
+48 - quarter+4beam
+75 - Sixty-fourth 
+53 - quarter+4beam+dot
+76 - Sixty-fourth+dot
+39 - double-whole
+59 - double-whole+dot
+38 - whole
+60 - whole+dot
+67 - half
+61 - half+dot
+4  - quarter-rest
+62 - quarter-rest+dot
+5  - eighth-rest
+63 - eighth-rest+dot
+6  - sixteenth-rest
+64 - sixteenth-rest+dot
+7  - Thirty-second-rest
+65 - Thirty-second-rest+dot
+8  - Sixty-fourth-rest
+66 - Sixty-fourth-rest+dot
+
+
+
+
+
+
+

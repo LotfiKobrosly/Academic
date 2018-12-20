@@ -11,6 +11,10 @@ The second step is to use a classifier (neural network) to identify the notes.
 
 Then, using the positions of the notes found at the first step and the identification in the second one, we are able to reconstruct the melody and play it.
 
+## References
+
+- 
+
 ## Copyright disclaimer
 
 The owners of this project are:
